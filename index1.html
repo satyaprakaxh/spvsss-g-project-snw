@@ -1,11 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guardian Assurance | Premium Claims</title>
+
+<!--sp karega   -->
 </head>
+
 <body>
-    
+  <nav>
+    <div class="brand">
+      <div class="mark">GA</div>
+      <div class="title">Guardian Assurance</div>
+    </div>
+
+    <div class="nav-links" role="navigation" aria-label="Main">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#" style="color:var(--blue-500)">File Claim</a>
+      <a href="#">Contact</a>
+    </div>
+    <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
+  </nav>
+
+  <header class="main1">
+    <h1>File an Insurance Claim</h1>
+    <p>We’re sorry you had an incident. Fill in the details below and our premium support team will handle the rest.</p>
+  </header>
+
+  <main class="container" role="main">
+    <aside class="card side enter">
+      <h3>How it works</h3>
+
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <strong>Submit details</strong>
+          <p>Provide your policy info and incident description.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <strong>Verification</strong>
+          <p>Claims are verified within 24 hours by an agent.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <strong>Resolution</strong>
+          <p>Receive settlement or next steps.</p>
+        </div>
+      </div>
+    </aside>
+
+    <section class="card form enter">
+      <h2>Submit Claim</h2>
+      <p class="muted">Secure. Private. Fast.</p>
+
+<!-- 65 -->
+    </section>
+  </main>
+
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <h3 id="modalTitle">Claim Submitted</h3>
+      <p id="modalMsg">Your claim ID: <strong id="claimId">—</strong></p>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button class="btn ghost" id="closeModal">Close</button>
+        <button class="btn" id="track">Track Claim</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Message</div>
+
+<!-- shlok will do it -->
+  <script src="script.js"></script>
 </body>
 </html>
