@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Guardian Assurance | Premium Claims</title>
+  <link rel="stylesheet" href="stylepro.css">
 
 <!--sp karega   -->
 </head>
@@ -62,7 +63,62 @@
       <h2>Submit Claim</h2>
       <p class="muted">Secure. Private. Fast.</p>
 
-<!-- 65 -->
+    <form id="claimForm" class="grid" novalidate>
+        <div>
+          <label>Policy Number</label>
+          <input id="policy" type="text" placeholder="POL-123456" required />
+        </div>
+
+        <div>
+          <label>Date of Incident</label>
+          <input id="date" type="date" required />
+        </div>
+
+        <div>
+          <label>Claim Type</label>
+          <select id="type">
+            <option value="vehicle">Vehicle</option>
+            <option value="health">Health</option>
+            <option value="property">Property</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Contact Phone</label>
+          <input id="contact" type="text" placeholder="+91 98765 43210" required />
+        </div>
+
+        <div class="full">
+          <label>Describe the incident</label>
+          <textarea id="desc" placeholder="What happened? Provide details..." required></textarea>
+        </div>
+
+        <div class="drop full" id="dropArea">
+          <div>
+            <strong>Attach evidence</strong>
+            <div class="muted">Photos, receipts, police report (jpg, png, pdf)</div>
+          </div>
+          <div>
+            <input id="files" type="file" accept="image/*,.pdf" multiple hidden>
+            <button type="button" class="btn ghost" id="browse">Browse</button>
+          </div>
+        </div>
+
+        <div class="thumbs full" id="thumbs"></div>
+
+        <div class="full" style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+          <div style="width:48%">
+            <div class="progress"><i id="progressBar"></i></div>
+          </div>
+          <div class="muted">Policy status: <strong id="policyStatus">Not checked</strong></div>
+        </div>
+
+        <div class="full actions">
+          <button type="button" class="btn ghost" id="saveDraft">Save Draft</button>
+          <button type="submit" class="btn" id="submitBtn">Submit Claim</button>
+        </div>
+      </form>  
     </section>
   </main>
 
