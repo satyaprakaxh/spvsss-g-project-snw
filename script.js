@@ -98,3 +98,76 @@ document.getElementById('saveDraft').addEventListener('click', () => {
   localStorage.setItem('guardianDraft', JSON.stringify(data));
   showToast('Draft saved locally');
 });
+
+// Load draft on page load
+window.addEventListener('load', () => {
+  const d = localStorage.getItem('guardianDraft');
+  if (d) {
+    try {
+      const parsed = JSON.parse(d);
+      policy.value = parsed.policy || '';
+      document.getElementById('date').value = parsed.date || '';
+      document.getElementById('type').value = parsed.type || '';
+      document.getElementById('contact').value = parsed.contact || '';
+      desc.value = parsed.desc || '';
+    } catch (e) { console.error(e); }
+  }
+});
+
+// -------------------- FORM SUBMIT --------------------
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const policyVal = policy.value.trim();
+  const descVal = desc.value.trim();
+  const contactVal = document.getElementById('contact').value.trim();
+
+  if (policyVal.length < 6) { showToast('Policy number looks wrong', 2000); policy.focus(); return; }
+  if (descVal.length < 12) { showToast('Description too short', 2000); desc.focus(); return; }
+  if (contactVal.length < 8) { showToast('Provide contact phone', 2000); document.getElementById('contact').focus(); return; }
+
+  // Simulate upload
+  progressBar.style.width = '0%';
+  let p = 0;
+  const up = setInterval(() => {
+    p += Math.random() * 22;
+    if (p >= 100) {
+      p = 100;
+      progressBar.style.width = p + '%';
+      clearInterval(up);
+      onUploadComplete();
+    } else {
+      progressBar.style.width = Math.floor(p) + '%';
+    }
+  }, 160);
+});
+
+function onUploadComplete() {
+  const id = 'GU-' + Date.now().toString(36).toUpperCase().slice(-6);
+  claimIdEl.textContent = id;
+  document.getElementById('modalTitle').textContent = 'Submitted!';
+  document.getElementById('modalMsg').textContent = 'Claim received — ID: ' + id;
+  modal.style.display = 'flex';
+  showToast('Claim submitted', 2000);
+  localStorage.removeItem('guardianDraft');
+}
+
+// -------------------- MODAL --------------------
+document.getElementById('closeModal').addEventListener('click', () => { modal.style.display = 'none'; });
+document.getElementById('track').addEventListener('click', () => { showToast('Opening tracker (demo)'); modal.style.display = 'none'; });
+
+// -------------------- UX --------------------
+// policy check on blur
+policy.addEventListener('blur', checkPolicy);
+
+// hamburger demo toggle
+document.getElementById('menuBtn').addEventListener('click', () => { showToast('Menu (demo)'); });
+
+// close modal on ESC
+window.addEventListener('keydown', e => { if (e.key === 'Escape') modal.style.display = 'none'; });
+
+// small focus shadow
+document.querySelectorAll('input, textarea, select').forEach(el => {
+  el.addEventListener('focus', () => el.style.boxShadow = '0 8px 28px rgba(37,115,212,0.12)');
+  el.addEventListener('blur', () => el.style.boxShadow = 'none');
+});
